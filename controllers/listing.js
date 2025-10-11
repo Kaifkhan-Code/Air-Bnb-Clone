@@ -31,16 +31,27 @@ module.exports.renderNewForm = (req, res) => {
   res.render("listings/new.ejs");
 };
 
-module.exports.create = async (req, res) => {
-  const newListing = new Listing(req.body.listing);
-  newListing.owner = req.user._id;
-  if(req.file){
-    newListing.image = { url: req.file.path, filename: req.file.filename };
+module.exports.create = async (req, res, next) => {
+  try {
+    console.log("📥 req.body.listing:", req.body.listing);
+    console.log("🖼️ req.file:", req.file);
+
+    const newListing = new Listing(req.body.listing);
+    newListing.owner = req.user._id;
+
+    if (req.file) {
+      newListing.image = { url: req.file.path, filename: req.file.filename };
+    }
+
+    await newListing.save();
+    req.flash("success", "✅ New Listing Created Successfully!");
+    res.redirect(`/listings/${newListing._id}`);
+  } catch (err) {
+    console.error("❌ Error in create controller:", err);
+    next(err); 
   }
-  await newListing.save();
-  req.flash("success", "✅ New Listing Created Successfully!");
-  res.redirect(`/listings/${newListing._id}`);
 };
+
 
 module.exports.show = async (req, res) => {
   const { id } = req.params;
