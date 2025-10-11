@@ -87,3 +87,34 @@ WanderLust/
 ├── .gitignore
 ├── package.json
 ├── server.js           # Entry point
+
+## 📸 Screenshots
+
+### 🏠 Home / Listings Page
+![Home Page](./assets/HomePage.png)
+
+### ➕ New Listing Form
+![Add Listing Form](./assets/NewListing.png)
+
+### ✏️ Edit Listing Page
+![Edit Listing Page](./assets/Edit.png)
+
+### 🔍 View Listing Page
+![View Listing Page](./assets/Show.png)
+
+### 📝 Sign Up Page
+![Sign Up Page](./assets/Signup.png)
+
+### 🔻 LoginUp Page
+![Footer](./assets/Login.png)
+
+### 🔻 Review Section
+![Footer](./assets/Review.png)
+
+### 🔻 Search Section
+![Footer](./assets/Search.png)
+
+
+
+
+
