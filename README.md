@@ -51,3 +51,39 @@ Each listing includes a **title, price, description, location, category**, and o
 
 ## 📁 **Project Structure**
 
+WanderLust/
+├── models/             # Mongoose schemas for Listings and Users
+│   └── listing.js
+│   └── user.js
+│
+├── routes/             # Route handlers
+│   └── listings.js
+│   └── users.js
+│   └── index.js
+│
+├── views/              # EJS templates
+│   ├── listings/
+│   ├── users/
+│   ├── partials/
+│   └── layout.ejs
+│
+├── public/             # Static files
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── middleware/         # Custom middleware functions
+│   └── index.js
+│
+├── utils/              # Utility functions (e.g., ExpressError, catchAsync)
+│   └── ExpressError.js
+│   └── catchAsync.js
+│
+├── config/             # Config files (Cloudinary, Mongoose, etc.)
+│   └── cloudinary.js
+│   └── mongoose.js
+│
+├── .env                # Environment variables
+├── .gitignore
+├── package.json
+├── server.js           # Entry point
