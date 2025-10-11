@@ -88,6 +88,15 @@ WanderLust/
 ├── package.json
 ├── server.js           # Entry point
 
+## 🚀 Future Implementations
+
+- 🌍 **Google Maps Integration** – Display interactive maps for listings and locations.
+- 💬 **Reviews & Ratings** – Allow users to leave feedback and rate listings.
+- 🔎 **Advanced Search Filters** – Filter listings by price, category, location, and more.
+- 📅 **Booking System** – Enable users to book listings with date selection and availability.
+- 🏷️ **Favorites / Wishlist** – Let users save listings they’re interested in.
+
+
 ## 📸 Screenshots
 
 ### 🏠 Home / Listings Page
