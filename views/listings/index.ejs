@@ -1,0 +1,86 @@
+<% layout('layouts/boilerplate') -%>
+<div class="container mt-4">
+  <!-- Search Bar -->
+<form action="/listings" method="GET" class="mb-4">
+  <input 
+    type="text" 
+    name="search" 
+    class="form-control" 
+    placeholder="Search by title, location, country, or category"
+    value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
+  >
+  <button class="btn btn-primary mt-2" type="submit">Search</button>
+</form>
+
+  <!-- Navbar Categories -->
+  <div class="d-flex justify-content-start align-items-center gap-5 flex-wrap py-3 border-bottom">
+    <% const categories = ["Trending","Rooms","Iconic Cities","Mountains","Castles","Amazing Pools","Camping","Farms","Arctic"]; %>
+    <% categories.forEach(cat => { %>
+      <a href="/listings?category=<%= cat %>" class="text-center text-decoration-none text-dark <%= selectedCategory === cat ? 'fw-bold text-primary' : '' %>">
+        <% if(cat === 'Trending'){ %><i class="fa-solid fa-fire fs-4 text-danger"></i><% } %>
+        <% if(cat === 'Rooms'){ %><i class="fa-solid fa-bed fs-4 text-primary"></i><% } %>
+        <% if(cat === 'Iconic Cities'){ %><i class="fa-solid fa-city fs-4 text-secondary"></i><% } %>
+        <% if(cat === 'Mountains'){ %><i class="fa-solid fa-mountain fs-4 text-success"></i><% } %>
+        <% if(cat === 'Castles'){ %><i class="fa-solid fa-chess-rook fs-4 text-warning"></i><% } %>
+        <% if(cat === 'Amazing Pools'){ %><i class="fa-solid fa-water-ladder fs-4 text-info"></i><% } %>
+        <% if(cat === 'Camping'){ %><i class="fa-solid fa-campground fs-4 text-success"></i><% } %>
+        <% if(cat === 'Farms'){ %><i class="fa-solid fa-tractor fs-4 text-danger"></i><% } %>
+        <% if(cat === 'Arctic'){ %><i class="fa-regular fa-snowflake fs-4 text-primary"></i><% } %>
+        <p class="small mt-1 mb-0"><%= cat %></p>
+      </a>
+    <% }) %>
+  </div>
+
+  <!-- Toggle Total Pay After Taxes -->
+  <div class="d-flex justify-content-end align-items-center mt-3 mb-3">
+    <label class="form-check-label me-2 fw-semibold" for="toggleTaxes">Show total after taxes</label>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="toggleTaxes">
+    </div>
+  </div>
+
+  <!-- Listings -->
+  <div class="row mt-4">
+    <% allListings.forEach(listing => { 
+        const serviceFee = listing.price * 0.10;
+        const taxes = listing.price * 0.12;
+        const totalPay = listing.price + serviceFee + taxes;
+    %>
+      <div class="col-md-4 mb-4">
+        <a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark">
+          <div class="card h-100 shadow-sm text-center">
+            <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %>">
+            <div class="card-body">
+              <h5 class="card-title fw-bold"><%= listing.title %></h5>
+              <p class="price-night mb-1">₹<%= listing.price.toLocaleString("en-IN") %> / night</p>
+              <p class="price-total text-muted small mb-0 d-none">
+                Total after taxes: <b>₹<%= totalPay.toFixed(0).toLocaleString("en-IN") %></b>
+              </p>
+              <p class="text-muted small">Category: <%= listing.category %></p>
+            </div>
+          </div>
+        </a>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("toggleTaxes");
+    const priceNight = document.querySelectorAll(".price-night");
+    const priceTotal = document.querySelectorAll(".price-total");
+
+    toggle.addEventListener("change", () => {
+      priceNight.forEach((el,i)=>{
+        if(toggle.checked){
+          el.classList.add("d-none");
+          priceTotal[i].classList.remove("d-none");
+        }else{
+          el.classList.remove("d-none");
+          priceTotal[i].classList.add("d-none");
+        }
+      });
+    });
+  });
+</script>
