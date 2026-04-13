@@ -80,7 +80,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // ✅ Global variables for templates
 app.use((req, res, next) => {
-  res.locals.currUser = req.user;
+  res.locals.currUser = req.user;   // ✅ THIS FIXES YOUR ERROR
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
