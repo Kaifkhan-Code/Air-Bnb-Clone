@@ -1,8 +1,12 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const mongoose = require("mongoose");
 const Listing = require("../models/listing");
 const initData = require("./data"); 
 
-const MONGO_URL = "mongodb+srv://mdkaifalamkhan60_db_user:Kaifkhan_013@cluster0.wkvtxt9.mongodb.net/?appName=Cluster0";
+const MONGO_URL = process.env.ATLASDB_URL;
 
 async function initDB() {
   await mongoose.connect(MONGO_URL);

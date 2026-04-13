@@ -24,10 +24,15 @@ const userRoutes = require("./routes/user");
 const dbUrl = process.env.ATLASDB_URL;
 
 // ✅ Connect to MongoDB
-mongoose.connect(dbUrl)
-  .then(() => console.log("✅ Connected to DB"))
-  .catch(err => console.error("❌ DB Error:", err));
-
+mongoose.connect(process.env.ATLASDB_URL, {
+  serverSelectionTimeoutMS: 5000,
+})
+.then(() => {
+  console.log("✅ Connected to DB");
+})
+.catch(err => {
+  console.log("❌ DB CONNECTION ERROR:", err);
+});
 // ✅ EJS setup
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
