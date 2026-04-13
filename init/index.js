@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Listing = require("../models/listing");
 const initData = require("./data"); 
 
-const MONGO_URL = "mongodb://localhost:27017/majorproject";
+const MONGO_URL = "mongodb+srv://mdkaifalamkhan60_db_user:Kaifkhan_013@cluster0.wkvtxt9.mongodb.net/?appName=Cluster0";
 
 async function initDB() {
   await mongoose.connect(MONGO_URL);

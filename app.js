@@ -96,10 +96,9 @@ app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page not found"));
 });
 
-// ✅ Error handler
 app.use((err, req, res, next) => {
-  const { status = 500, message = "Something went wrong" } = err;
-  res.status(status).render("listings/error", { status, message });
+  console.log("🔥 ERROR:", err);   // 👈 IMPORTANT
+  res.status(500).send(err.message); // 👈 SHOW ERROR IN BROWSER
 });
 
 // ✅ Server start (FIXED)
