@@ -1,17 +1,18 @@
 const express = require("express");
 const router = express.Router();
+
 const wrapAsync = require("../utils/wrapAsync");
 const { validateListing, isLoggedIn, isOwner } = require("../middleware");
 const listingController = require("../controllers/listing");
+
 const multer = require("multer");
-const { storage } = require("../cloudConfig");
-const upload = multer({ storage });
+const upload = multer({ storage: multer.memoryStorage() }); // ✅ FIX
 
 router.route("/")
   .get(wrapAsync(listingController.index))
   .post(
     isLoggedIn,
-    upload.single("listing[image]"),
+    upload.single("listing[image]"), // ✅ stays same
     validateListing,
     wrapAsync(listingController.create)
   );
@@ -23,11 +24,15 @@ router.route("/:id")
   .put(
     isLoggedIn,
     isOwner,
-    upload.single("listing[image]"),
+    upload.single("listing[image]"), // ✅ stays same
     validateListing,
     wrapAsync(listingController.update)
   )
-  .delete(isLoggedIn, isOwner, wrapAsync(listingController.delete));
+  .delete(
+    isLoggedIn,
+    isOwner,
+    wrapAsync(listingController.delete)
+  );
 
 router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.editForm));
 
