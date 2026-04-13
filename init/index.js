@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Listing = require("../models/listing");
 const initData = require("./data"); 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const MONGO_URL = "mongodb://localhost:27017/majorproject";
 
 async function initDB() {
   await mongoose.connect(MONGO_URL);
