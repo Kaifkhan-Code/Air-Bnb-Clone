@@ -85,7 +85,9 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   next();
 });
-
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
 // ✅ Routes
 app.use("/", userRoutes);
 app.use("/listings", listings);
